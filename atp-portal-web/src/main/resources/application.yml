@@ -1,0 +1,9 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+debug: false
+spring:
+  http:
+    encoding:
+      charset: UTF-8
