@@ -6,6 +6,6 @@
 #2. 详细封装过程
 <img src='./images/process_detail.png'></img>
 #3. 包结构
-
+<img src='./images/package.png'><//img>
 #4. 关键类图
 
