@@ -4,6 +4,9 @@ package com.casic.atp.model;
  * 算法模型，用来保存模型的名称，路径，输入输出参数，解析函数
  */
 public class Model {
+    public static String MODEL_JOBLIB = "joblib";
+    public static String MODEL_KERAS = "keras";
+
     //模型名称
     private String name;
 
