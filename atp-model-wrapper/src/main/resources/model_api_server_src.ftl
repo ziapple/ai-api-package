@@ -10,15 +10,13 @@ import os
 app = Flask(__name__)
 
 
-def get_input(data):
-    return ""
-
 # 模型封装服务
 # @json 输入参数,'{"model":"iris模型", "data":[[6.5, 3.0, 5.8, 2.2]]}'
 @app.route('/api', methods=['POST'])
 def model_api():
     # 读取的body原始数据application/json
     data = request.get_data()
+    print('data=%s' % data)
     if not data:
         return jsonify("请输入模型参数")
     json_data = json.loads(data.decode('utf-8'))
