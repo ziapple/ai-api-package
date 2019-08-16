@@ -22,7 +22,7 @@ def model_api():
     if not data:
         return jsonify("请输入模型参数")
     json_data = json.loads(data.decode('utf-8'))
-    print(json_data)
+
     x_test = np.array(json_data.get('data'))  # 数据特征
     dir = os.path.abspath(os.path.dirname(__file__)) #当前路径
     model = joblib.load(os.path.join(dir, 'iris.model'))

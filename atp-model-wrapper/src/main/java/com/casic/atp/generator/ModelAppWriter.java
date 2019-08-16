@@ -1,5 +1,6 @@
 package com.casic.atp.generator;
 
+import com.casic.atp.model.Model;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -12,6 +13,11 @@ import java.util.Map;
 
 import static freemarker.template.TemplateExceptionHandler.*;
 
+/**
+ * 服务化封装APP工程FreeMarker模板生成器
+ * 1. 默认在web工程model-apps目录下生成model_api_server.py工程文件
+ * 2. 通过@ModeGenerator调用@ModelAPPWriter.write()方法生成
+ */
 public class ModelAppWriter {
     // 创建Configuration实例，指定版本
     public static Configuration configuration = new Configuration(Configuration.getVersion());
@@ -50,6 +56,8 @@ public class ModelAppWriter {
     }
 
     public static void main(String[] args){
+        //模拟Model
+        Model model = new Model();
         ModelAppWriter fl = new ModelAppWriter();
         try {
             fl.write(null);
