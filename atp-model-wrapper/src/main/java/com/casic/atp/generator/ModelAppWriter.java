@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.HashMap;
 import java.util.Map;
 
 import static freemarker.template.TemplateExceptionHandler.*;
@@ -47,8 +48,8 @@ public class ModelAppWriter {
         template.process(map, writer);
     }
 
-    /**
-     * 返回工程根目录
+    /**  30
+.0     * 返回工程根目录
      * @return
      */
     public String getRoot(){
@@ -58,9 +59,15 @@ public class ModelAppWriter {
     public static void main(String[] args){
         //模拟Model
         Model model = new Model();
-        ModelAppWriter fl = new ModelAppWriter();
+        model.setDefGetInput("def get_input(data):\n" +
+                "    predict_data = list(data.values())[0]  # 默认获取第一项数据\n" +
+                "    return np.array(predict_data)");
+        model.setType(Model.MODEL_JOBLIB);
+        model.setFilePath("iris.model");
+        model.setName("iris");
+        ModelAppWriter writer = new ModelAppWriter();
         try {
-            fl.write(null);
+            writer.write(model.toMap());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {

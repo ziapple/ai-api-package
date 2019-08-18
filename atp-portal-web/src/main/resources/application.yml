@@ -7,3 +7,5 @@ spring:
   http:
     encoding:
       charset: UTF-8
+  thymeleaf:
+    cache:false

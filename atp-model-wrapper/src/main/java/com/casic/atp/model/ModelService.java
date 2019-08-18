@@ -1,12 +1,16 @@
 package com.casic.atp.model;
 
 
+import com.casic.atp.generator.KerasModelGenerator;
+import com.casic.atp.generator.ModelGenerator;
 import com.casic.atp.generator.SKModelGenerator;
 import com.casic.atp.util.HttpUtils;
+import org.springframework.stereotype.Service;
 
 /**
  * 模型服务
  */
+@Service
 public class ModelService {
 
     /**
@@ -33,7 +37,11 @@ public class ModelService {
      * @param model
      */
     public void generate(Model model){
-        SKModelGenerator generator = new SKModelGenerator();
+        ModelGenerator generator = null;
+        if(model.getType().equals(Model.MODEL_JOBLIB))
+            generator = new SKModelGenerator();
+        else if(model.getType().equals(Model.MODEL_KERAS))
+            generator = new KerasModelGenerator();
         generator.generate(model);
     }
 
