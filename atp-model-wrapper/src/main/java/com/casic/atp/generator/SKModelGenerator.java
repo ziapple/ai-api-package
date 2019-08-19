@@ -1,10 +1,4 @@
 package com.casic.atp.generator;
-import com.casic.atp.model.Model;
-import freemarker.template.TemplateException;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**

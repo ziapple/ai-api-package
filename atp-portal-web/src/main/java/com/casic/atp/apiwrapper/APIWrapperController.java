@@ -1,36 +1,47 @@
 package com.casic.atp.apiwrapper;
 
-import com.casic.atp.model.ModelService;
+import com.casic.atp.model.ATPModel;
+import com.casic.atp.model.ATPModelService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-@RestController
+@Controller
 public class APIWrapperController {
     @Resource
-    ModelService modelService;
+    ATPModelService modelService;
 
-    @RequestMapping(value = "/wrapper", method = {RequestMethod.GET})
-    public String wrapper() {
-       return "wrapper";
-    }
-
-    @RequestMapping("/mvc")
-    public String Hello(){
-        return "hello";
+    // 返回wrapper页面
+    @RequestMapping("/wrapper")
+    public String wrapper(Model model){
+        //模拟模型文件
+        List<String> list = new ArrayList<String>();
+        list.add("iris.model");
+        model.addAttribute("models", list);
+        return "wrapper";
     }
 
     /**
-     * 获取模型
-     * @return
+     * 生成沙盒模型
+     * 1. 保存模型文件request->model
+     * 2. 生成工程文件model->app
+     * 3. 上传工程文件到环境app->environment
      */
-    @RequestMapping("/get_model")
-    public String get_model() {
-        return "iris.model";
+    public String genSanBox(Model model){
+        //1. 保存模型文件request->model
+        ATPModel atpModel = this.toATPModel(model);
+        modelService.saveModel(atpModel);
+        //2. 生成工程文件model->app
+        modelService.generate(atpModel);
+        //3. 上传工程文件到环境app->environment
+        return "";
+    }
+
+    public ATPModel toATPModel(Model model){
+        return new ATPModel();
     }
 }

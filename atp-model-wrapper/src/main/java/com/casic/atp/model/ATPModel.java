@@ -1,6 +1,7 @@
 package com.casic.atp.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,20 +22,26 @@ import java.util.Map;
  *  * (5.5)返回输出结果  buldGetOutPut     $return_output       return get_output()
  *  * (6) 主执行文件     buildMain         $def_main            if __main__ == "main"
  */
-public class Model {
+public class ATPModel {
     public static String MODEL_JOBLIB = "joblib";
     public static String MODEL_KERAS = "keras";
 
     //模型名称, eg. iris
     public String  name;
-    //模型保存路径
+    //模型环境中的保存路径
     public String filePath;
     //keras或者joblib
     public String type;
+    //自定义输入参数
+    public List<ATPParams> inParams;
+    //自定义输出参数
+    public List<ATPParams> outParams;
     //定义输入解析函数
     public String defGetInput;
     //定义输出解析函数
     public String defGetOutput;
+    //模型所在的容器环境对象
+    public ATPEnvironment environment;
 
     public String getName() {
         return name;
@@ -76,6 +83,30 @@ public class Model {
         this.defGetOutput = defGetOutput;
     }
 
+    public List<ATPParams> getInParams() {
+        return inParams;
+    }
+
+    public void setInParams(List<ATPParams> inParams) {
+        this.inParams = inParams;
+    }
+
+    public List<ATPParams> getOutParams() {
+        return outParams;
+    }
+
+    public void setOutParams(List<ATPParams> outParams) {
+        this.outParams = outParams;
+    }
+
+    public ATPEnvironment getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(ATPEnvironment environment) {
+        this.environment = environment;
+    }
+
     public Map toMap(){
         Map map = new HashMap();
         if(this.getDefGetInput()!=null){
@@ -85,5 +116,21 @@ public class Model {
             map.put("def_get_output", this.getDefGetInput());
         }
         return map;
+    }
+
+    /**
+     * 获得模型本地服务工程所在的路径
+     * @return
+     */
+    public String getLocalFilePath(){
+        return ATPEnvironment.APPRoot + "/" + getAppFileName();
+    }
+
+    /**
+     * 获取工程文件名称
+     * @return
+     */
+    public String getAppFileName(){
+        return  this.getName() + "_server.py";
     }
 }

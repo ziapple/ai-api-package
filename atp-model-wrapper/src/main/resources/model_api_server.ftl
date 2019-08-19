@@ -2,7 +2,7 @@ from json import JSONDecodeError
 from flask import Flask, jsonify, request
 import numpy as np
 import json
-${def_import}
+<#if def_import??>${def_import}</#if>
 
 def ok(obj):
     """
@@ -67,7 +67,7 @@ def get_output(result):
     :return:json格式
     """
     return ok(result.tolist())
-<#/if>
+</#if>
 
 
 @app.route('/api', methods=['POST'])
@@ -92,7 +92,7 @@ def model_api():
         # 2. 将请求参数转化为utf8编码，并转化为json格式
         json_data = json.loads(data.decode('utf-8'))
         # 3. 加载模型文件
-        ${load_model}
+        <#if load_model??>${load_model}</#if>
         # 4. 处理请求数据
         x_test = get_input(json_data)
         # 5. 预测模型
@@ -111,4 +111,4 @@ def model_api():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5001)
