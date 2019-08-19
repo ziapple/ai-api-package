@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>模型封装配置化页面</title>
+    <script type="text/javascript" th:src="@{/jquery-3.4.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/jquery.form.js}"></script>
 </head>
 <body>
+<form id="modelForm" action="/model/save" method="post">
 <!-- 模型选择 -->
 <div class="col">
     <h2>第一步：选择模型</h2>
@@ -24,7 +27,7 @@
 
 <!-- 参数选择 -->
 <div class="col">
-    <h2>第二步：填写输入</h2>
+    <h2>第二步：填写输入（自定义转化器）</h2>
     <table class="table table-bordered">
         <thead>
         <th>输入参数</th>
@@ -43,7 +46,7 @@
         </tr>
         </tbody>
     </table>
-    <h2>第二步：填写输出</h2>
+    <h2>第二步：填写输出(自定义转化器)</h2>
     <table class="table table-bordered">
         <thead>
         <th>输出参数</th>
@@ -89,7 +92,17 @@
 
 <div class="col">
     <h2>第四步：生成沙盒</h2>
-    <input type="submit"/>
+    *模型名称: <input name="name" type="text" value="iris"/>
 </div>
+<div>
+    <input type="button" onclick="genSanBox()" value="生成沙盒"/>
+    <input type="button" onclick="saveModel()" value="暂存"/>
+</div>
+</form>
 </body>
 </html>
+<script>
+    function genSanBox(){
+        $('#modelForm').ajaxSubmit();
+    }
+</script>
