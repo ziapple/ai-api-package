@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a44df385-fd05-4d4b-aa0f-55abcdadfa7c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/atp-portal-web/src/main/java/com/casic/atp/controller/RetCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/atp-portal-web/src/main/java/com/casic/atp/controller/RetResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/atp-portal-web/src/main/resources/static/jquery-3.4.1.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/atp-portal-web/src/main/resources/static/jquery.form.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/generator/AbstractModelGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/generator/AbstractModelGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPEnvironment.class" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPEnvironment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPModelService.class" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPModelService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/atp-portal-web/src/main/java/com/casic/atp/apiwrapper/APIWrapperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/src/main/java/com/casic/atp/apiwrapper/APIWrapperController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/atp-portal-web/src/main/resources/templates/model-wrapper.html" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/src/main/resources/templates/model-wrapper.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/atp-portal-web/target/classes/com/casic/atp/apiwrapper/APIWrapperController.class" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/target/classes/com/casic/atp/apiwrapper/APIWrapperController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-portal-web/target/classes/templates/wrapper.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-portal-web/target/classes/templates/model-wrapper.html" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/target/classes/templates/model-wrapper.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -223,5 +215,21 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/atp-portal-web/src/main/java/com/casic/atp/apiwrapper/APIWrapperController.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/atp-portal-web/src/main/java/com/casic/atp/apiwrapper/APIWrapperController.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

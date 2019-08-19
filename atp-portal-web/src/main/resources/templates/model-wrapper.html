@@ -103,6 +103,20 @@
 </html>
 <script>
     function genSanBox(){
-        $('#modelForm').ajaxSubmit();
+        $('#modelForm').ajaxSubmit({
+            url:'/model/genSanBox',
+            success: function(data){
+                alert(data);
+            }
+        });
+    }
+
+    function saveModel(){
+        $('#modelForm').ajaxSubmit({
+            url:'/model/save',
+            success: function(data){
+                alert(data);
+            }
+        });
     }
 </script>

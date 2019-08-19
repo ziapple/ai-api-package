@@ -3,6 +3,7 @@ package com.casic.atp.apiwrapper;
 import com.casic.atp.controller.RetResult;
 import com.casic.atp.model.ATPModel;
 import com.casic.atp.model.ATPModelService;
+import org.apache.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +37,11 @@ public class APIWrapperController {
      */
     @RequestMapping(value = "/save",  method={RequestMethod.POST})
     @ResponseBody
-    public RetResult<ATPModel> saveModel(Model model){
+    public RetResult<ATPModel> saveModel(HttpServletRequest request){
         try {
+            String name = request.getParameter("name");
             //1. 保存模型文件request->model
-            ATPModel atpModel = this.toATPModel(model);
+            ATPModel atpModel = new ATPModel();
             modelService.saveModel(atpModel);
             return RetResult.OK(atpModel);
         }catch (Exception e){
