@@ -1,5 +1,6 @@
 package com.casic.atp.util;
 
+import com.casic.atp.ATPException;
 import com.casic.atp.model.ATPEnvironment;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
@@ -361,7 +362,7 @@ public class HttpUtils {
      * @return
      * @throws IOException
      */
-    public static int upload(String url,String filePath) throws IOException {
+    public static int upload(String url,String filePath) throws IOException, ATPException {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         CloseableHttpResponse httpResponse = null;
         RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(200000).setSocketTimeout(200000000).build();
@@ -377,11 +378,13 @@ public class HttpUtils {
         httpResponse = httpClient.execute(httpPost);
         HttpEntity responseEntity = httpResponse.getEntity();
         int statusCode= httpResponse.getStatusLine().getStatusCode();
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(responseEntity.getContent()));
-        String str = "";
-        while((str = reader.readLine()) != null) {
-            System.out.println(str);
+        if(statusCode!=200){
+            BufferedReader reader = new BufferedReader(new InputStreamReader(responseEntity.getContent()));
+            String str = "";
+            while((str = reader.readLine()) != null) {
+                System.out.println(str);
+            }
+            throw new ATPException("上传模型错误");
         }
         httpClient.close();
         if(httpResponse!=null){
@@ -390,10 +393,10 @@ public class HttpUtils {
         return statusCode;
     };
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws ATPException {
         try {
             HttpUtils.upload("http://192.168.56.102:5000/upload_app",
-                    ATPEnvironment.getRoot() + ATPEnvironment.APPRoot + "/iris_server.py");
+                    ATPEnvironment.getRoot() + ATPEnvironment.tmpDir + "/iris_server.py");
         } catch (IOException e) {
             e.printStackTrace();
         }

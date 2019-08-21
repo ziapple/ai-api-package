@@ -7,14 +7,26 @@ public class ATPParams {
     //参数名称
     public String name;
 
-    //参数类型,int,字符,Base64
-    public enum type{INT, STR, BASE64};
+    //参数类型,INT,STR,BASE64
+    public String type;
 
     //是否必填
     public Boolean isRequired;
 
     //默认值
     public String defaultValue;
+
+    public ATPParams(String name, String type) {
+        this.name = name;
+        this.type = type;
+    }
+
+    public ATPParams(String name, String type, Boolean isRequired, String defaultValue) {
+        this.name = name;
+        this.type = type;
+        this.isRequired = isRequired;
+        this.defaultValue = defaultValue;
+    }
 
     public String getName() {
         return name;

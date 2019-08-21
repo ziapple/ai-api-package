@@ -54,7 +54,7 @@ public class RetResult<T> {
    }
 
    public static <T> RetResult<T> ERROR(String message) {
-      return new RetResult<T>().setCode(RetCode.FAIL).setMsg(SUCCESS);
+      return new RetResult<T>().setCode(RetCode.FAIL).setMsg(message);
    }
 
    public static <T> RetResult<T> RES(int code, String msg) {

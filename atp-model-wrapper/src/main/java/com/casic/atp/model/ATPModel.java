@@ -1,5 +1,6 @@
 package com.casic.atp.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,20 +29,22 @@ public class ATPModel {
 
     //模型名称, eg. iris
     public String  name;
-    //模型环境中的保存路径
-    public String filePath;
+    //app工程在环境中的路径
+    public String appFilePath;
+    //模型本身在环境中的路径
+    public String modelFilePath;
     //keras或者joblib
     public String type;
     //自定义输入参数
-    public List<ATPParams> inParams;
+    public List<ATPParams> inParams = new ArrayList<ATPParams>();
     //自定义输出参数
-    public List<ATPParams> outParams;
+    public List<ATPParams> outParams = new ArrayList<ATPParams>();
     //定义输入解析函数
     public String defGetInput;
     //定义输出解析函数
     public String defGetOutput;
     //模型所在的容器环境对象
-    public ATPEnvironment environment;
+    public ATPEnvironment environment = new ATPEnvironment();
 
     public String getName() {
         return name;
@@ -51,12 +54,27 @@ public class ATPModel {
         this.name = name;
     }
 
-    public String getFilePath() {
-        return filePath;
+
+    public String getAppFilePath() {
+        return appFilePath;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setAppFilePath(String appFilePath) {
+        this.appFilePath = appFilePath;
+    }
+
+    /**
+     * 运行环境会将app放置在model下面，通过python model/${filePath}来启动app工程
+     * 所以在获取模型文件路径的时候，默认要加上model前缀
+     * TODO 共享文件存储，要获得模型文件的绝对路径
+     * @return
+     */
+    public String getModelFilePath() {
+        return "model/" + modelFilePath;
+    }
+
+    public void setModelFilePath(String modelFilePath) {
+        this.modelFilePath = modelFilePath;
     }
 
     public String getType() {
@@ -122,15 +140,15 @@ public class ATPModel {
      * 获得模型本地服务工程所在的路径
      * @return
      */
-    public String getLocalFilePath(){
-        return ATPEnvironment.APPRoot + "/" + getAppFileName();
+    public String getTmpAPPFilePath(){
+        return ATPEnvironment.tmpDir + "/" + getTmpAppFileName();
     }
 
     /**
      * 获取工程文件名称
      * @return
      */
-    public String getAppFileName(){
+    public String getTmpAppFileName(){
         return  this.getName() + "_server.py";
     }
 }

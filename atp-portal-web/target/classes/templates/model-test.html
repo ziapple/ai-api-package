@@ -2,94 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>模型封装配置化页面</title>
+    <title>模型测试页面</title>
+    <script type="text/javascript" th:src="@{/jquery-3.4.1.min.js}"></script>
 </head>
 <body>
-<!-- 模型选择 -->
-<div class="col">
-    <h2>第一步：选择模型</h2>
-    <table class="table table-bordered">
-        <thead>
-            <th>序号</th>
-            <th>模型名称</th>
-        </thead>
-        <tbody>
-            <tr th:each="model,modelStat : ${models}">
-                <td th:text="${modelStat.index+1}">序号</td>
-                <td th:text="${model}">用户名</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<!-- 参数选择 -->
-<div class="col">
-    <h2>第二步：填写输入（自定义转化器）</h2>
-    <table class="table table-bordered">
-        <thead>
-        <th>输入参数</th>
-        <th>类型</th>
-        </thead>
-        <tbody>
-        <tr>
-            <td><input name="params_in"/></td>
-            <td>
-                <select>
-                    <option>int</option>
-                    <option>字符</option>
-                    <option>Base64</option>
-                </select>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <h2>第二步：填写输出(自定义转化器)</h2>
-    <table class="table table-bordered">
-        <thead>
-        <th>输出参数</th>
-        <th>类型</th>
-        </thead>
-        <tbody>
-        <tr>
-            <td><input name="params_in"/></td>
-            <td>
-                <select>
-                    <option>int</option>
-                    <option>字符</option>
-                    <option>Base64</option>
-                </select>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="col">
-    <h2>第三步：输入解析函数</h2>
-    <div>
-        <input type="radio">默认解析函数</input>
-        <input type="radio">自定义解析函数</input>
-    </div>
-    <div>
-        <textarea name="params_in"></textarea>
-    </div>
-</div>
-
-<div class="col">
-    <h2>第三步：输出解析函数</h2>
-    <div>
-        <input type="radio">默认解析函数</input>
-        <input type="radio">自定义解析函数</input>
-    </div>
-    <div>
-        <textarea name="params_in"></textarea>
-    </div>
-</div>
-
-
-<div class="col">
-    <h2>第四步：生成沙盒</h2>
-    <input type="submit"/>
+<div>
+    <h2>第一步：填写输入参数</h2>
+    <textarea id="model_input" style="width:300px;height:100px;">
+        
+    </textarea>
+    <h2>点击测试</h2>
+    <input type="button" onclick="testModel();" value="点击测试"/>
+    <br/>
+    <textarea id="model_output" style="width:300px;height:100px;"></textarea>
 </div>
 </body>
 </html>
+<script>
+function testModel(){
+    $.ajax({
+        method:'post',
+        url:"http://192.168.56.102:5001/api",
+        async:false,
+        data:$('#model_input').val()
+    });
+}
+</script>

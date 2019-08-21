@@ -1,14 +1,18 @@
 package com.casic.atp.model;
 
 
+import com.casic.atp.ATPException;
 import com.casic.atp.generator.KerasModelGenerator;
 import com.casic.atp.generator.ModelGenerator;
 import com.casic.atp.generator.SKModelGenerator;
 import com.casic.atp.util.HttpUtils;
+import freemarker.template.TemplateException;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,11 +57,23 @@ public class ATPModelService {
     }
 
     /**
+     * 获取所有模型
+     * @return
+     */
+    public List<ATPModel> listAll(){
+        List<ATPModel> list = new ArrayList<ATPModel>();
+        for(String key : modelDB.keySet()){
+            list.add(modelDB.get(key));
+        }
+        return list;
+    }
+
+    /**
      * 生成沙盒
      * 生成模型调用的python文件， 该文件为flask工程，直接提供模型调用API服务
      * @param model
      */
-    public void generate(ATPModel model){
+    public void generate(ATPModel model) throws IOException, TemplateException {
         ModelGenerator generator = null;
         if(model.getType().equals(ATPModel.MODEL_JOBLIB))
             generator = new SKModelGenerator();
@@ -71,14 +87,14 @@ public class ATPModelService {
      * 调用ip:port/upload/
      * @param modelName 模型文件
      */
-    public void deploy(String modelName) throws IOException {
+    public void deploy(String modelName) throws IOException, ATPException {
         ATPModel model = getModel(modelName);
         String url = model.getEnvironment().getDeployCmd();
         // 绝对路径
-        String filePath = ATPEnvironment.getRoot() + model.getLocalFilePath();
+        String filePath = ATPEnvironment.getRoot() + model.getTmpAPPFilePath();
         HttpUtils.upload( url, filePath);
         //更新远程执行文件路径
-        model.setFilePath("model/" + model.getAppFileName());
+        model.setAppFilePath("model/" + model.getTmpAppFileName());
         modelDB.put(model.getName(), model);
     }
 
@@ -89,7 +105,7 @@ public class ATPModelService {
     public void start(String modelName) throws Exception {
         ATPModel model = getModel(modelName);
         //处理成get能够传递的参数
-        String filePath = model.getFilePath().replaceAll("/", "!");
+        String filePath = model.getAppFilePath().replaceAll("/", "!");
         HttpUtils.get(model.getEnvironment().getStartCmd(filePath));
     }
 }

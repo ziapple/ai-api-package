@@ -12,6 +12,6 @@ public class KerasModelGenerator extends AbstractModelGenerator {
     }
 
     public String buildLoadModel(){
-        return "model = load_model('" +  model.getFilePath() + "');";
+        return "model = joblib.load('" +  model.getEnvironment().APPRoot + "/" + model.getModelFilePath() + "')";
     }
 }

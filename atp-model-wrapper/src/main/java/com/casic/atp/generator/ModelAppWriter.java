@@ -40,7 +40,7 @@ public class ModelAppWriter {
         // 获取模版
         Template template = configuration.getTemplate("model_api_server.ftl");
         // 创建一个Writer对象，指定生成的文件保存的路径及文件名
-        String modelAppsDir = ATPEnvironment.getRoot() + ATPEnvironment.APPRoot;
+        String modelAppsDir = ATPEnvironment.getRoot() + ATPEnvironment.tmpDir;
         if(!new File(modelAppsDir).exists()){
             new File(modelAppsDir).mkdir();
         }
@@ -57,7 +57,7 @@ public class ModelAppWriter {
                 "    predict_data = list(data.values())[0]  # 默认获取第一项数据\n" +
                 "    return np.array(predict_data)");
         model.setType(ATPModel.MODEL_JOBLIB);
-        model.setFilePath("iris.model");
+        model.setAppFilePath("iris.model");
         model.setName("iris");
         ModelAppWriter writer = new ModelAppWriter();
         try {

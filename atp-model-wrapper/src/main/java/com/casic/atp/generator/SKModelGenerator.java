@@ -12,6 +12,6 @@ public class SKModelGenerator extends AbstractModelGenerator {
     }
 
     public String buildLoadModel(){
-        return "model = joblib.load('" +  model.getFilePath() + "')";
+        return "model = joblib.load('" +  model.getEnvironment().APPRoot + "/" + model.getModelFilePath() + "')";
     }
 }

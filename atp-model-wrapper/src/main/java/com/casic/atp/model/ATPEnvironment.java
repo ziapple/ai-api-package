@@ -15,7 +15,7 @@ import java.io.File;
  */
 public class ATPEnvironment {
     //动态生成的环境IP
-    private String ip;
+    private String ip = "localhost";
     //默认的环境端口
     public static String PORT_DEFAULT = "5000";
     //生成的api访问端口，默认为5001
@@ -23,7 +23,9 @@ public class ATPEnvironment {
     //API服务运行的路径，默认在atp-shell-api/model/${modelName}_server.py文件
     private String appFilePath;
     //模型临时保存的文件目录，默认在atp-portal-web/model-apps下
-    public static String APPRoot = "/model-apps";
+    public static String tmpDir = "/model-apps";
+    //模型在容器环境的根目录
+    public static String APPRoot = "/opt/atp-shell-api";
 
     public String getIp() {
         return ip;
@@ -47,7 +49,7 @@ public class ATPEnvironment {
      * @return
      */
     public String getShellUrl(){
-        return this.getIp() + this.PORT_DEFAULT;
+        return "http://" + this.getIp() + ":" + this.PORT_DEFAULT;
     }
 
     /**
@@ -55,7 +57,7 @@ public class ATPEnvironment {
      * @return
      */
     public String getAPIUrl(){
-        return this.getIp() + this.PORT_API;
+        return "http://" + this.getIp() + ":" + this.PORT_API;
     }
 
     /**
@@ -63,7 +65,7 @@ public class ATPEnvironment {
      * @return
      */
     public String getDeployCmd(){
-        return getShellUrl() + "/upload";
+        return getShellUrl() + "/upload_app";
     }
 
     /**
@@ -72,6 +74,6 @@ public class ATPEnvironment {
      * @return
      */
     public String getStartCmd(String pythonFile){
-        return getShellUrl() + "/python/nohup" + pythonFile;
+        return getShellUrl() + "/python/nohup/" + pythonFile;
     }
 }
