@@ -1,9 +1,14 @@
 package com.casic.atp.apiwrapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.casic.atp.controller.RetResult;
 import com.casic.atp.model.ATPModel;
 import com.casic.atp.model.ATPModelService;
 import com.casic.atp.model.ATPParams;
+import com.casic.atp.util.HttpUtils;
+import com.fasterxml.jackson.core.util.InternCache;
+import jdk.nashorn.internal.parser.JSONParser;
+import net.sf.json.JSON;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,7 +71,10 @@ public class APIWrapperController {
             return RetResult.OK(attr);
         }catch (Exception e){
             e.printStackTrace();
-            return RetResult.ERROR(e.getCause().getMessage());
+            if(e.getCause() != null)
+                return RetResult.ERROR(e.getCause().getMessage());
+            else
+                return RetResult.ERROR(e.getMessage());
         }
     }
 
@@ -94,10 +102,40 @@ public class APIWrapperController {
             return RetResult.OK(attr);
         }catch (Exception e){
             e.printStackTrace();
-            return RetResult.ERROR(e.getCause().getMessage());
+            if(e.getCause() != null)
+                return RetResult.ERROR(e.getCause().getMessage());
+            else
+                return RetResult.ERROR(e.getMessage());
         }
     }
 
+    /**
+     * 测试模型
+     * @return
+     */
+    @RequestMapping(value = "/invoke",  method={RequestMethod.POST})
+    @ResponseBody
+    public RetResult<Map<String,Object>> invokeModel(HttpServletRequest request){
+        try {
+            String modelName = request.getParameter("name");
+            //请求数据json格式，系统自动传递data参数
+            String jsonStr = request.getParameter("data");
+            ATPModel atpModel = modelService.getModel(modelName);
+            //直接将请求转发给真实的API服务
+            String result = HttpUtils.post(atpModel.getEnvironment().getInvokeCmd(), jsonStr, null);
+            Map<String, Object> data = JSONObject.parseObject(result);
+            if(Integer.parseInt(data.get("code").toString())==200)
+                return RetResult.OK(data);
+            else
+                return RetResult.ERROR(data.get("msg").toString());
+        }catch (Exception e){
+            e.printStackTrace();
+            if(e.getCause() != null)
+                return RetResult.ERROR(e.getCause().getMessage());
+            else
+                return RetResult.ERROR(e.getMessage());
+        }
+    }
 
     /**
      * 模型转化

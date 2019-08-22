@@ -11,6 +11,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import javax.net.ssl.*;
+import javax.swing.text.StyledEditorKit;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -46,14 +47,29 @@ public class HttpUtils {
      * @throws UnsupportedEncodingException
      */
     private static String buildParams(Map<String,? extends Object> params) throws UnsupportedEncodingException{
+        return buildParams(params, false);
+    }
+
+    /**
+     * 处理访问字符串处理
+     * @param params
+     * @return
+     * @throws UnsupportedEncodingException
+     */
+    private static String buildParams(Map<String,? extends Object> params, Boolean isUrlEncode) throws UnsupportedEncodingException{
         if(params ==null || params.isEmpty()){
             return null;
         }
         StringBuilder builder = new StringBuilder();
         for (Map.Entry<String, ? extends Object> entry : params.entrySet()) {
             if (entry.getKey() != null && entry.getValue() != null)
-                builder.append(entry.getKey().trim()).append("=")
-                        .append(URLEncoder.encode(entry.getValue().toString(), CHAR_SET)).append("&");
+                if(isUrlEncode) {
+                    builder.append(entry.getKey().trim()).append("=")
+                            .append(URLEncoder.encode(entry.getValue().toString(), CHAR_SET)).append("&");
+                }else{
+                    builder.append(entry.getKey().trim()).append("=")
+                            .append(entry.getValue().toString()).append("&");
+                }
         }
         if(builder.charAt(builder.length()-1)=='&'){
             builder.deleteCharAt(builder.length()-1);

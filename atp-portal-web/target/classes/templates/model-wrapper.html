@@ -5,6 +5,14 @@
     <title>模型封装配置化页面</title>
     <script type="text/javascript" th:src="@{/jquery-3.4.1.min.js}"></script>
     <script type="text/javascript" th:src="@{/jquery.form.js}"></script>
+    <script type="text/javascript" th:src="@{/jquery.custom.imitate.editor-v1.0.js}"></script>
+    <style>
+        .textarea{
+            width:800px;
+            height:150px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
 <form id="modelForm" action="/model/save" method="post">
@@ -91,7 +99,7 @@
         <input name="params_def_input" value="1" type="radio">自定义解析函数</input>
     </div>
     <div>
-        <textarea name="params_def_input_text"></textarea>
+        <textarea name="params_def_input_text" class="textarea"></textarea>
     </div>
 </div>
 
@@ -102,7 +110,7 @@
         <input name="params_def_output" value="1" type="radio">自定义解析函数</input>
     </div>
     <div>
-        <textarea name="params_def_output_text"></textarea>
+        <textarea name="params_def_output_text" class="textarea"></textarea>
     </div>
 </div>
 
@@ -119,31 +127,33 @@
 </body>
 </html>
 <script>
-    function genSanBox(){
-        $('#modelForm').ajaxSubmit({
-            url:'/model/genSanBox',
-            success: function(data){
-                if(data.code==200){
-                    alert('生成沙盒成功' + data.data.name);
-                    //跳转到模型列表页面
-                    window.location = '/model/list';
-                }else{
-                    alert(data.msg)
-                }
-            }
-        });
-    }
+$(".textarea").initTextarea();
 
-    function saveModel(){
-        $('#modelForm').ajaxSubmit({
-            url:'/model/save',
-            success: function(data){
-                if(data.code==200){
-                    alert('保存成功' + data.data.name);
-                }else{
-                    alert(data.msg)
-                }
+function genSanBox(){
+    $('#modelForm').ajaxSubmit({
+        url:'/model/genSanBox',
+        success: function(data){
+            if(data.code==200){
+                alert('生成沙盒成功' + data.data.name);
+                //跳转到模型列表页面
+                window.location = '/model/list';
+            }else{
+                alert(data.msg)
             }
-        });
-    }
+        }
+    });
+}
+
+function saveModel(){
+    $('#modelForm').ajaxSubmit({
+        url:'/model/save',
+        success: function(data){
+            if(data.code==200){
+                alert('保存成功' + data.data.name);
+            }else{
+                alert(data.msg)
+            }
+        }
+    });
+}
 </script>

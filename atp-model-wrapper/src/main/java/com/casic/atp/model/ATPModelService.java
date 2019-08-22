@@ -29,6 +29,20 @@ public class ATPModelService {
     //模拟模型持久化
     Map<String, ATPModel> modelDB = new HashMap<String, ATPModel>();
 
+    //初始化几个model
+    {
+        ATPModel irisModel = new ATPModel();
+        irisModel.setName("iris");
+        irisModel.setModelFilePath("model/iris.model");
+        irisModel.setType(ATPModel.MODEL_JOBLIB);
+        //读取模型执行所在的容器环境信息
+        ATPEnvironment irisEnvironment = new ATPEnvironment();
+        irisEnvironment.setIp("192.168.56.102");
+        irisModel.setEnvironment(irisEnvironment);
+        //模拟模型环境
+        modelDB.put("iris", irisModel);
+    }
+
     /**
      * 启动模型容器运行环境，返回容器对象
      * @return ATPEnvironment 容器的ip等信息

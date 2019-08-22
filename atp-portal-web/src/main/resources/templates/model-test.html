@@ -4,27 +4,66 @@
     <meta charset="UTF-8">
     <title>模型测试页面</title>
     <script type="text/javascript" th:src="@{/jquery-3.4.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/jquery.custom.imitate.editor-v1.0.js}"></script>
+    <style>
+        .textarea{
+            width:800px;
+            height:150px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
 <div>
     <h2>第一步：填写输入参数</h2>
-    <textarea id="model_input" style="width:300px;height:100px;">
-        
-    </textarea>
-    <h2>点击测试</h2>
-    <input type="button" onclick="testModel();" value="点击测试"/>
-    <br/>
-    <textarea id="model_output" style="width:300px;height:100px;"></textarea>
+    <textarea id="model_input" class="textarea"></textarea>
+    <br/><br/>
+    点击测试:<input type="button" onclick="testModel();" value="点击测试"/>
+    <br/><br/>
+    <textarea id="model_output" class="textarea"></textarea>
 </div>
 </body>
 </html>
 <script>
+$("#model_input, #model_output").initTextarea();
+$('#model_input').val('{"data":"\[\[6.5, 3.0, 5.8, 2.2\]\]"}');
+
+//不能直接掉服务，需要通过服务器转发请求
 function testModel(){
+    //检查传入参数是否为json格式
+    if(!isJsonString($("#model_input").val())){
+        alert('输出参数不是json格式!');
+        return;
+    }
+
     $.ajax({
-        method:'post',
-        url:"http://192.168.56.102:5001/api",
-        async:false,
-        data:$('#model_input').val()
+        type:'post',
+        url:"/model/invoke",
+        data:{
+            name:'iris',
+            data:$('#model_input').val()
+        },
+        success:function(result){
+            if(result.code==200){
+                $('#model_output').val(JSON.stringify(result.data));
+            }else{
+                $('#model_output').val(result.msg);
+            }
+        },
+        error:function(){
+            alert('调用失败');
+        }
     });
+}
+
+function isJsonString(obj) {
+    try {
+        if (typeof JSON.parse(obj) == "object") {
+            return true;
+        }
+    } catch(e) {
+        return false;
+    }
+    return false;
 }
 </script>

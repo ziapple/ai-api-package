@@ -61,7 +61,7 @@ public class ATPEnvironment {
     }
 
     /**
-     * 发布工程文件
+     * 发布工程文件命令
      * @return
      */
     public String getDeployCmd(){
@@ -75,5 +75,12 @@ public class ATPEnvironment {
      */
     public String getStartCmd(String pythonFile){
         return getShellUrl() + "/python/nohup/" + pythonFile;
+    }
+
+    /**
+     * 测试API命令
+     */
+    public String getInvokeCmd(){
+        return this.getAPIUrl() + "/api";
     }
 }
