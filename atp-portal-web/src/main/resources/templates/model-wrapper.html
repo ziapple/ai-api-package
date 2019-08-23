@@ -99,7 +99,13 @@
         <input name="params_def_input" value="1" type="radio">自定义解析函数</input>
     </div>
     <div>
-        <textarea name="params_def_input_text" class="textarea"></textarea>
+        <textarea name="params_def_input_text" class="textarea">def get_input(req_params):
+    """ req_params要和第二步的输入参数一致
+    :req_params:json格式，通过get("XX")获取数据
+    :return:json格式
+    """
+    x=req_params.get("data")
+    return np.array(x)</textarea>
     </div>
 </div>
 
@@ -110,7 +116,13 @@
         <input name="params_def_output" value="1" type="radio">自定义解析函数</input>
     </div>
     <div>
-        <textarea name="params_def_output_text" class="textarea"></textarea>
+        <textarea name="params_def_output_text" class="textarea">def get_output(out_params):
+    """
+    将结果转化成json格式，code=200表示返回成功，不能更改
+    :param result:np.array类型
+    :return:json格式
+    """
+    return jsonify(code=200, msg="success", result=out_params.tolist())</textarea>
     </div>
 </div>
 

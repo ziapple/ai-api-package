@@ -53,13 +53,13 @@ def get_input(data):
     return np.array(predict_data)
 
 
-def get_output(result):
+def get_output(out_params):
     """
-    将结果转化成json格式
+    将结果转化成json格式，code=200表示返回成功，不能更改
     :param result:np.array类型
     :return:json格式
     """
-    return ok(result.tolist())
+    return jsonify(code=200, msg="success", out=out_params.tolist())
 
 
 @app.route('/api', methods=['POST'])

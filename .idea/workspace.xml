@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a44df385-fd05-4d4b-aa0f-55abcdadfa7c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/main.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/result.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/generator/ModelAppWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/generator/ModelAppWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-portal-web/src/main/java/com/casic/atp/apiwrapper/APIWrapperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/src/main/java/com/casic/atp/apiwrapper/APIWrapperController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-portal-web/model-apps/iris_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/model-apps/iris_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-portal-web/src/main/resources/templates/model-wrapper.html" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/src/main/resources/templates/model-wrapper.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -210,11 +206,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/generator/AbstractModelGenerator.java</url>
-          <line>130</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/generator/AbstractModelGenerator.java</url>
           <line>159</line>
