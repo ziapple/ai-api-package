@@ -2,25 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a44df385-fd05-4d4b-aa0f-55abcdadfa7c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/atp-portal-web/src/main/resources/static/jquery.custom.imitate.editor-v1.0.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/atp-portal-web/src/test/java/JSONTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/model/ATPEnvironment.java" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/model/ATPEnvironment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/model/ATPModelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/model/ATPModelService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/util/HttpUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/util/HttpUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPEnvironment.class" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPEnvironment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPModelService.class" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPModelService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/util/HttpUtils$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/util/HttpUtils$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/util/HttpUtils$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/util/HttpUtils$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/util/HttpUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/util/HttpUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/atp-model-wrapper-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/META-INF/atp-model-wrapper.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/ATPException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/generator/AbstractModelGenerator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/generator/KerasModelGenerator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/generator/ModelAppWriter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/generator/ModelGenerator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/generator/SKModelGenerator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPEnvironment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPModelService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/model/ATPParams.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/util/HttpUtils$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/util/HttpUtils$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/com/casic/atp/util/HttpUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/classes/model_api_server.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/atp-portal-web/model-apps/iris_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/model-apps/iris_server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/atp-portal-web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-portal-web/src/main/java/com/casic/atp/apiwrapper/APIWrapperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/src/main/java/com/casic/atp/apiwrapper/APIWrapperController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-portal-web/src/main/resources/templates/model-test.html" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/src/main/resources/templates/model-test.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-portal-web/src/main/resources/templates/model-wrapper.html" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/src/main/resources/templates/model-wrapper.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-portal-web/target/classes/com/casic/atp/apiwrapper/APIWrapperController.class" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/target/classes/com/casic/atp/apiwrapper/APIWrapperController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-portal-web/target/classes/templates/model-test.html" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/target/classes/templates/model-test.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-portal-web/target/classes/templates/model-wrapper.html" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/target/classes/templates/model-wrapper.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-portal-web/target/atp-portal-web-2.0.1.RELEASE.jar" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/target/atp-portal-web-2.0.1.RELEASE.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-portal-web/target/atp-portal-web-2.0.1.RELEASE.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/target/atp-portal-web-2.0.1.RELEASE.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-portal-web/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-portal-web/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-portal-web/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
