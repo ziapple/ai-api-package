@@ -44,6 +44,7 @@ public class ModelAppWriter {
         if(!new File(modelAppsDir).exists()){
             new File(modelAppsDir).mkdir();
         }
+        System.out.println("modeAppDir=" + modelAppsDir);
         Writer writer = new FileWriter(new File(modelAppsDir + "/" + modelName + "_server.py"));
         template.process(map, writer);
     }
