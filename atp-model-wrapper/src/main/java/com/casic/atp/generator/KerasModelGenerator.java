@@ -7,11 +7,18 @@ package com.casic.atp.generator;
  * Keras数据模板生成器
  */
 public class KerasModelGenerator extends AbstractModelGenerator {
+    @Override
     public String buildImportLine(){
-        return "from sklearn.externals import joblib";
+        return "from keras.models import load_model";
     }
 
+    @Override
     public String buildLoadModel(){
-        return "model = joblib.load('" +  model.getEnvironment().APPRoot + "/" + model.getModelFilePath() + "')";
+        return "model = load_model('" +  model.getEnvironment().APPRoot + "/" + model.getModelFilePath() + "')";
+    }
+
+    @Override
+    public java.lang.String buildPredictModel() {
+        return "result = model.predict_classes(x_test)";
     }
 }

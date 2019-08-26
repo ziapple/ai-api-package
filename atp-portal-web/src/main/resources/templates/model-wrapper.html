@@ -104,8 +104,15 @@
     :req_params:json格式，通过get("XX")获取数据
     :return:json格式
     """
+    # 标准代码
     x=req_params.get("data")
-    return np.array(x)</textarea>
+    return np.array(x)
+    # base64图像调用代码
+    img_data = base64.b64decode(predict_data)
+    with open('tmp.jpg', 'wb') as f: # 存成临时文件
+        f.write(img_data)
+    img = Image.open('tmp.jpg')
+    return np.array(img)</textarea>
     </div>
 </div>
 

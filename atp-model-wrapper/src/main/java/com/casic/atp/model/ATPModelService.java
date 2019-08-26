@@ -41,6 +41,17 @@ public class ATPModelService {
         irisModel.setEnvironment(irisEnvironment);
         //模拟模型环境
         modelDB.put("iris", irisModel);
+
+        ATPModel mnistModel = new ATPModel();
+        mnistModel.setName("mnist");
+        mnistModel.setModelFilePath("model/mnist.model.h5");
+        mnistModel.setType(ATPModel.MODEL_KERAS);
+        //读取模型执行所在的容器环境信息
+        ATPEnvironment mnistEnvironment = new ATPEnvironment();
+        mnistEnvironment.setIp("192.168.56.102");
+        mnistModel.setEnvironment(mnistEnvironment);
+        //模拟模型环境
+        modelDB.put("mnist", mnistModel);
     }
 
     /**

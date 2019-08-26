@@ -5,7 +5,7 @@ import json
 import re
 import base64
 from PIL import Image
-<#if def_import??>${def_import}</#if>
+from keras.models import load_model
 
 def ok(obj):
     """
@@ -40,9 +40,6 @@ def is_base64(img_str):
 app = Flask(__name__)
 
 
-<#if def_get_input??>
-${def_get_input}
-<#else>
 def get_input(data):
     """ 自定义输入解析函数
     （一）ATP的API请求需满足以下要求
@@ -76,12 +73,8 @@ def get_input(data):
         return np.array(img)
     else:
         return np.array(predict_data)
-</#if>
 
 
-<#if def_get_output??>
-${def_get_output}
-<#else>
 def get_output(result):
     """
     将结果转化成json格式
@@ -89,7 +82,6 @@ def get_output(result):
     :return:json格式
     """
     return ok(result.tolist())
-</#if>
 
 
 @app.route('/api', methods=['POST'])
@@ -114,11 +106,11 @@ def model_api():
         # 2. 将请求参数转化为utf8编码，并转化为json格式
         json_data = json.loads(data.decode('utf-8'))
         # 3. 加载模型文件
-        <#if load_model??>${load_model}</#if>
+        model = load_model('/opt/atp-shell-api/model/iris.model')
         # 4. 处理请求数据
         x_test = get_input(json_data)
         # 5. 预测模型
-        <#if predict_model??>${predict_model}</#if>
+        result = model.predict_classes(x_test)
         # 6. 处理返回结果
         return get_output(result)
     except JSONDecodeError:
