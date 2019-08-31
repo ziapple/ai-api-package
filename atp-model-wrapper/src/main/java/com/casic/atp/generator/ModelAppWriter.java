@@ -1,6 +1,7 @@
 package com.casic.atp.generator;
 
-import com.casic.atp.model.Model;
+import com.casic.atp.model.ATPEnvironment;
+import com.casic.atp.model.ATPModel;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -9,7 +10,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.HashMap;
 import java.util.Map;
 
 import static freemarker.template.TemplateExceptionHandler.*;
@@ -36,38 +36,33 @@ public class ModelAppWriter {
         }
     }
 
-    public void write(Map map) throws IOException, TemplateException {
+    public void write(Map map, String modelName) throws IOException, TemplateException {
         // 获取模版
         Template template = configuration.getTemplate("model_api_server.ftl");
         // 创建一个Writer对象，指定生成的文件保存的路径及文件名
-        String modelAppsDir = getRoot() + "/model-apps";
+        String modelAppsDir = ATPEnvironment.getRoot() + ATPEnvironment.tmpDir;
         if(!new File(modelAppsDir).exists()){
             new File(modelAppsDir).mkdir();
         }
-        Writer writer = new FileWriter(new File(modelAppsDir + "/" + "model_api_server.py"));
+        System.out.println("modeAppDir=" + modelAppsDir);
+        Writer writer = new FileWriter(new File(modelAppsDir + "/" + modelName + "_server.py"));
         template.process(map, writer);
     }
 
-    /**  30
-.0     * 返回工程根目录
-     * @return
-     */
-    public String getRoot(){
-        return new File(new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()).getParent()).getParent();
-    }
+
 
     public static void main(String[] args){
         //模拟Model
-        Model model = new Model();
+        ATPModel model = new ATPModel();
         model.setDefGetInput("def get_input(data):\n" +
                 "    predict_data = list(data.values())[0]  # 默认获取第一项数据\n" +
                 "    return np.array(predict_data)");
-        model.setType(Model.MODEL_JOBLIB);
-        model.setFilePath("iris.model");
+        model.setType(ATPModel.MODEL_JOBLIB);
+        model.setAppFilePath("iris.model");
         model.setName("iris");
         ModelAppWriter writer = new ModelAppWriter();
         try {
-            writer.write(model.toMap());
+            writer.write(model.toMap(), model.getName());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {

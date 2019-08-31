@@ -2,7 +2,7 @@ from json import JSONDecodeError
 from flask import Flask, jsonify, request
 import numpy as np
 import json
-<#if def_import??>${def_import}</#if>
+from sklearn.externals import joblib
 
 def ok(obj):
     """
@@ -25,9 +25,6 @@ def error(msg):
 app = Flask(__name__)
 
 
-<#if def_get_input??>
-${def_get_input}
-<#else>
 def get_input(data):
     """ 自定义输入解析函数
     （一）ATP的API请求需满足以下要求
@@ -54,20 +51,15 @@ def get_input(data):
     """
     predict_data = list(data.values())[0]  # 默认获取第一项数据
     return np.array(predict_data)
-</#if>
 
 
-<#if def_get_output??>
-${def_get_output}
-<#else>
-def get_output(result):
+def get_output(out_params):
     """
-    将结果转化成json格式
+    将结果转化成json格式，code=200表示返回成功，不能更改
     :param result:np.array类型
     :return:json格式
     """
-    return ok(result.tolist())
-</#if>
+    return jsonify(code=200, msg="success", out=out_params.tolist())
 
 
 @app.route('/api', methods=['POST'])
@@ -92,7 +84,7 @@ def model_api():
         # 2. 将请求参数转化为utf8编码，并转化为json格式
         json_data = json.loads(data.decode('utf-8'))
         # 3. 加载模型文件
-        <#if load_model??>${load_model}</#if>
+        model = joblib.load('/opt/atp-shell-api/model/iris.model')
         # 4. 处理请求数据
         x_test = get_input(json_data)
         # 5. 预测模型

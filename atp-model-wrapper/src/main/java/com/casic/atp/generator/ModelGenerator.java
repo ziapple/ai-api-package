@@ -1,6 +1,9 @@
 package com.casic.atp.generator;
 
-import com.casic.atp.model.Model;
+import com.casic.atp.model.ATPModel;
+import freemarker.template.TemplateException;
+
+import java.io.IOException;
 
 
 /**
@@ -22,5 +25,5 @@ import com.casic.atp.model.Model;
  */
 public interface ModelGenerator {
     //生成模型
-    void generate(Model model);
+    void generate(ATPModel model) throws IOException, TemplateException;
 }

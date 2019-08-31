@@ -1,6 +1,6 @@
 package com.casic.atp.generator;
 
-import com.casic.atp.model.Model;
+import com.casic.atp.model.ATPModel;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
@@ -27,7 +27,7 @@ import java.util.Map;
  */
 public class AbstractModelGenerator implements ModelGenerator {
     // 模型对象
-    protected Model model;
+    protected ATPModel model;
     // 模型构建Map
     protected Map<String, Object> map = new HashMap<String, Object>();
 
@@ -35,7 +35,7 @@ public class AbstractModelGenerator implements ModelGenerator {
      * 生成SKLearn的模型
      * @param model
      */
-    public void generate(Model model){
+    public void generate(ATPModel model) throws IOException, TemplateException {
         //根据模型配置生成可执行的python文件
         this.model = model;
         ModelAppWriter appWriter = new ModelAppWriter();
@@ -46,13 +46,10 @@ public class AbstractModelGenerator implements ModelGenerator {
                 .buildOutputParser()
                 .buildModelAPI()
                 .buildMain();
-        try {
-            appWriter.write(map);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
+
+        appWriter.write(map, model.getName());
+        //更新模型服务本地文件路径
+        model.setAppFilePath(model.getTmpAPPFilePath());
     }
 
 
@@ -79,7 +76,7 @@ public class AbstractModelGenerator implements ModelGenerator {
      * @return
      */
     private AbstractModelGenerator buildFlaskApp(){
-        if(buildFlaskApp()!=null)
+        if(buildFlaskAppLine()!=null)
             map.put("def_app", buildFlaskAppLine());
         return this;
     }
@@ -156,10 +153,11 @@ public class AbstractModelGenerator implements ModelGenerator {
 
     /**
      * （5.3）加载模型==buildLoadModel
+     * 获取模型在服务器环境中的绝对路径
      * @return
      */
     public String buildLoadModel(){
-        return "model = joblib.load('" +  model.getFilePath() + "')";
+        return "model = joblib.load('" +  model.getEnvironment().APPRoot + "/" + model.getModelFilePath() + "')";
     }
 
     /**

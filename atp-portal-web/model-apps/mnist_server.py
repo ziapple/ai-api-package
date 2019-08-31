@@ -2,7 +2,10 @@ from json import JSONDecodeError
 from flask import Flask, jsonify, request
 import numpy as np
 import json
-<#if def_import??>${def_import}</#if>
+import re
+import base64
+from PIL import Image
+from keras.models import load_model
 
 def ok(obj):
     """
@@ -22,12 +25,21 @@ def error(msg):
     return jsonify(code=500, msg=str(msg))
 
 
+def is_base64(img_str):
+    """
+    判断是否为Base64编码，如是，对参数进行解码
+    :param img_str: Base64字符串
+    :return:
+    """
+    base64_pattern = r"^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$"
+    pattern = re.compile(base64_pattern)
+    match = pattern.match(img_str)
+    return True if match else False
+
+
 app = Flask(__name__)
 
 
-<#if def_get_input??>
-${def_get_input}
-<#else>
 def get_input(data):
     """ 自定义输入解析函数
     （一）ATP的API请求需满足以下要求
@@ -53,13 +65,16 @@ def get_input(data):
     :return: 返回np.array类型
     """
     predict_data = list(data.values())[0]  # 默认获取第一项数据
-    return np.array(predict_data)
-</#if>
+    if is_base64(predict_data):  # 必须是图片格式
+        img_data = base64.b64decode(predict_data)
+        with open("tmp.jpg", "wb") as f: # 存成临时文件
+            f.write(img_data)
+        img = Image.open("tmp.jpg")
+        return np.array(img)
+    else:
+        return np.array(predict_data)
 
 
-<#if def_get_output??>
-${def_get_output}
-<#else>
 def get_output(result):
     """
     将结果转化成json格式
@@ -67,7 +82,6 @@ def get_output(result):
     :return:json格式
     """
     return ok(result.tolist())
-</#if>
 
 
 @app.route('/api', methods=['POST'])
@@ -92,11 +106,11 @@ def model_api():
         # 2. 将请求参数转化为utf8编码，并转化为json格式
         json_data = json.loads(data.decode('utf-8'))
         # 3. 加载模型文件
-        <#if load_model??>${load_model}</#if>
+        model = load_model('/opt/atp-shell-api/model/iris.model')
         # 4. 处理请求数据
         x_test = get_input(json_data)
         # 5. 预测模型
-        result = model.predict(x_test)
+        result = model.predict_classes(x_test)
         # 6. 处理返回结果
         return get_output(result)
     except JSONDecodeError:

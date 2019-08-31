@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>模型封装配置化页面</title>
+</head>
+<body>
+<table class="table table-bordered">
+    <thead>
+    <th>序号</th>
+    <th>模型名称</th>
+    <th>操作</th>
+    </thead>
+    <tbody>
+    <tr th:each="model,modelStat : ${models}">
+        <td th:text="${modelStat.index+1}"></td>
+        <td th:text="${model.name}"></td>
+        <td>
+            <a th:href="@{'/model/test?name=' + ${model.name}}">测试</a>
+            <a th:href="@{'/model/test'}">正式部署</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

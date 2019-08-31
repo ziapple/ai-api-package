@@ -2,6 +2,9 @@ from json import JSONDecodeError
 from flask import Flask, jsonify, request
 import numpy as np
 import json
+import re
+import base64
+from PIL import Image
 <#if def_import??>${def_import}</#if>
 
 def ok(obj):
@@ -20,6 +23,18 @@ def error(msg):
     :return:
     """
     return jsonify(code=500, msg=str(msg))
+
+
+def is_base64(img_str):
+    """
+    判断是否为Base64编码，如是，对参数进行解码
+    :param img_str: Base64字符串
+    :return:
+    """
+    base64_pattern = r"^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$"
+    pattern = re.compile(base64_pattern)
+    match = pattern.match(img_str)
+    return True if match else False
 
 
 app = Flask(__name__)
@@ -53,7 +68,14 @@ def get_input(data):
     :return: 返回np.array类型
     """
     predict_data = list(data.values())[0]  # 默认获取第一项数据
-    return np.array(predict_data)
+    if is_base64(predict_data):  # 必须是图片格式
+        img_data = base64.b64decode(predict_data)
+        with open("tmp.jpg", "wb") as f: # 存成临时文件
+            f.write(img_data)
+        img = Image.open("tmp.jpg")
+        return np.array(img)
+    else:
+        return np.array(predict_data)
 </#if>
 
 
@@ -96,7 +118,7 @@ def model_api():
         # 4. 处理请求数据
         x_test = get_input(json_data)
         # 5. 预测模型
-        result = model.predict(x_test)
+        <#if predict_model??>${predict_model}</#if>
         # 6. 处理返回结果
         return get_output(result)
     except JSONDecodeError:

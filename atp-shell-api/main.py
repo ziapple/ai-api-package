@@ -83,7 +83,7 @@ def upload_model():
 def upload_file():
     fname = request.files.get('file')
     if fname:
-        new_fname = os.path.abspath(os.path.dirname(__file__) + '/model/' + fname.filename)
+        new_fname = os.path.dirname(os.path.abspath(__file__)) + '/model/' + fname.filename
         fname.save(new_fname)
         return ok()
     else:
