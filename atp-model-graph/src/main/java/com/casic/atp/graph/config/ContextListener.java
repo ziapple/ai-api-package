@@ -21,6 +21,7 @@ public class ContextListener implements ServletContextListener
 
     /**
      * Embedded Tocmat启动的时候不会启动ContextLoader.initWebApplicationContext,初始化加进去
+     * 生产环境去掉
      * @param servletContextEvent
      */
     @Override

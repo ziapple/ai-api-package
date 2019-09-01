@@ -2,24 +2,24 @@
 <head>
     <meta charset="utf-8">
     <title>tail log</title>
-    <script type="text/javascript" th:src="@{/jquery-3.4.1.min.js}"></script>
-    <script type="text/javascript" th:src="@{/jquery.custom.imitate.editor-v1.0.js}"></script>
-    <script type="text/javascript" th:src="@{/jquery-ui.min.js}"></script>
-    <script type="text/javascript" th:src="@{/svg.min.js}"></script>
-    <script type="text/javascript" th:src="@{/svg.draggable.js}"></script>
-    <link type="text/css" rel="stylesheet" th:href="@{/graph.css}" />
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="jquery.custom.imitate.editor-v1.0.js"></script>
+	<script type="text/javascript" src="jquery-ui.min.js"></script>
+	<script type="text/javascript" src="svg.min.js"></script>
+	<script type="text/javascript" src="svg.draggable.js"></script>	
+	<link type="text/css" rel="stylesheet" href="graph.css" />
     <script type="text/javascript">
 		$(document).ready(function(){
 			//=======================================================svg代码==================================================================//
 			//see https://svgjs.com
-			var board  = SVG('g-board').size(3000, 3000);
-
+			var board  = SVG('g-board').size(3000, 3000);		
+						
 			$('div[draggable="true"]').draggable({
 				helper:'clone',
-				cursor: 'crosshair',
-				drag:function(event, ui){
+				cursor: 'crosshair',				
+				drag:function(event, ui){					
 					var leftX = $('.g-left-panel').width();
-					var topY = $('.g-unit-list-header').height();
+					var topY = $('.g-unit-list-header').height();					
 					//console.debug('left:' + (ui.offset.left - leftX) + ',top:' + (ui.offset.top - topY));
 				},
 				stop:function(event, ui){
@@ -27,67 +27,52 @@
 						var leftX = $('.g-left-panel').width();
 						var topY = $('.g-unit-list-header').height();
 						//未加滚动条
-						var x = ui.offset.left - leftX;
+						var x = ui.offset.left - leftX;						
 						var y = ui.offset.top - topY;
 						var group = board.group().attr('class', 'g-unit-group');
 						group.attr('transform', 'translate(' + x + ' ' + y +')');
 						group.rect(219, 32).addClass('algorithm g-unit-body');
-						group.rect(31, 30).addClass('g-unit-icon-container g-unit-icon-container-algorithm').attr('x','1').attr('y','1');
-						group.text($(this).text()).addClass('g-unit-name').attr('x', '109.5').attr('y', '-2');
+						group.rect(31, 30).addClass('g-unit-icon-container g-unit-icon-container-algorithm').attr('x','1').attr('y','1');					
+						group.text($(this).text()).addClass('g-unit-name').attr('x', '109.5').attr('y', '-2');					
 						group.draggable({
 							x:x,
 							y:y
-						});
-						var $group = $('#' + group.attr('id'));
+						});												
+						var $group = $('#' + group.attr('id'));		
 					}
 				}
-			});
-
+			});								
+						
 			//动态绑定事件
 			$('#g-board').on('click', 'g', function(event){
 				$(this).focus();
 			})
-			$('#g-board').on('keydown', 'g', function(event){
+			$('#g-board').on('keydown', 'g', function(event){				
 				if(event.keyCode==46){
 					SVG.get($(this).attr('id')).remove();
 				}
 			});
 
-            //=======================================================初始化=================================================//
+			//==============================================设计器、代码视图============================================================//
 			$(".textarea").initTextarea();
-            $('.g-code-view').hide();
-		})
-
+			$('.g-code-view').hide();
+			$('#btnCode').click(function(){
+				$('.g-board-container').toggle();
+				$('.g-code-view').toggle();
+				if($('#btnCode').text()=='切换为代码视图'){
+					$('#btnCode').text('切换为设计视图')
+				}else{
+					$('#btnCode').text('切换为代码视图')
+				}				
+			});
+		})	
+		
 		//判断是否在设计区域内
 		function inBoard(x, y){
 			return true;
 		}
-
-		//==============================================工具栏============================================================//
-		//切换代码
-		function switchCode(){
-		    $('.g-board-container').toggle();
-            $('.g-code-view').toggle();
-            if($('#btnCode').text()=='切换为代码视图'){
-                $('#btnCode').text('切换为设计视图')
-            }else{
-                $('#btnCode').text('切换为代码视图')
-            }
-		}
-
-        //运行
-       function runCode(){
-            // 指定websocket路径
-            var websocket = new WebSocket('ws://localhost:8080/log');
-            websocket.onmessage = function(event) {
-                // 接收服务端的实时日志并添加到HTML页面中
-                $("#log-container div").append(event.data);
-                // 滚动条滚动到最低部
-                $("#log-container").scrollTop($("#log-container div").height() - $("#log-container").height());
-            };
-       }
     </script>
-    <style>
+	<style>
 		.textarea{
             width:100%;
             height:500px;
@@ -143,20 +128,20 @@
         </div>
         <div class="g-center-panel">
             <div class="g-action-bar">
-                <div class="g-action-bar-switch" onClick="switchCode();">切换为代码视图</div>
-                <div class="g-action-bar-switch" onClick="runCode();">运行</div>
+                <div class="g-action-bar-switch" id="btnCode">切换为代码视图</div>
+                <div class="g-action-bar-switch">运行</div>
                 <div class="g-action-bar-switch">终止</div>
                 <div class="g-action-bar-switch">保存</div>
                 <div class="g-action-bar-switch">部署</div>
             </div>
-            <!--设计器视图-->
+			<!--设计器视图-->
             <div class="g-board-container">
                 <div class="g-board-main" id="g-board">
-
+                   
                 </div>
             </div>
-            <!--代码视图-->
-            <div class="g-code-view">
+			<!--代码视图-->
+			<div class="g-code-view">
 				<textarea name="code-content" class="textarea">
 # coding=utf-8
 
@@ -165,7 +150,7 @@ import paddle.fluid as fluid
 import sys
 import time
 				</textarea>
-            </div>
+			</div>
             <div class="g-bottom-panel">
                 <div class="g-bottom-panel-board-main" data-collapsed="false">
                     <div class="g-output-empty" id="log-container">

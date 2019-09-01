@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="utf-8">
+    <title>tail log</title>
+    <script type="text/javascript" th:src="@{/jquery-1.9.0.js}"></script>
+    <script type="text/javascript" th:src="@{/jquery.layout-1.4.0.js}"></script>
+    <script type="text/javascript" th:src="@{/jquery-ui.min.js}"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/layout-default-latest.css}" />
+    <style>
+        .main{
+            min-width: 1180px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-sizing: border-box;
+        }
+        .el{
+            border:#ddd solid 1px;
+            padding:5px;
+            height:25px;
+            margin:5px;
+        }
+         .el2{
+            border:#ddd solid 0 1px;
+            width:100px;
+            float:left;
+            padding:5px;
+            height:20px;
+            margin:5px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('body').layout({
+                center__paneSelector:".outer-center",
+                west__paneSelector:".outer-west",
+                east__paneSelector:".outer-east",
+                west__size:250,
+                east__size:250,
+                spacing_open:8,// ALL panes
+                spacing_closed:12, // ALL panes
+                south__maxSize:200,
+                //,	north__spacing_open:0,
+                //,	south__spacing_open:0,
+                //	north__maxSize:200,
+                // MIDDLE-LAYOUT (child of outer-center-pane)
+                center__childOptions:{
+                    center__paneSelector:".middle-center",
+                    west__paneSelector:".middle-west",
+                    east__paneSelector:".middle-east",
+                    west__size:100,
+                    east__size:100,
+                    spacing_open:8,  // ALL panes
+                    spacing_closed:12, // ALL panes
+                    // INNER-LAYOUT (child of middle-center-pane)
+                    center__childOptions:{
+                        center__paneSelector:".inner-center",
+                        west__paneSelector:".inner-west",
+                        east__paneSelector:".inner-east",
+                        west__size:75,
+                        east__size:75,
+                        spacing_open:8,  // ALL panes
+                        spacing_closed:8,  // ALL panes
+                        west__spacing_closed:12,
+                        east__spacing_closed:12
+                    }
+                }
+            });
+
+            $('.draggable').draggable();
+        });
+    </script>
+</head>
+<body>
+<diiv class="main">
+    <div class="g-main">
+        <div class="outer-west" style="float:left">
+            <div class="algorithm">
+                <div>算法</div>
+                <div class="el draggable">线性回归</div>
+                <div class="el draggable">逻辑回归</div>
+                <div class="el draggable">LeNet-5</div>
+                <div class="el draggable">AlexNet</div>
+            </div>
+            <div class="data">
+                <div>数据</div>
+                <div class="el draggable">文本数据导入</div>
+                <div class="el draggable">数据分割</div>
+            </div>
+            <div class="train">
+                <div>训练</div>
+                <div class="el draggable">普通训练控制</div>
+                <div class="el draggable">图像分类控制</div>
+            </div>
+            <div class="test">
+                <div>测试</div>
+                <div class="el draggable">普通验证测试</div>
+                <div class="el draggable">图像验证测试</div>
+            </div>
+        </div>
+        <div class="outer-center">
+            <div class="middle-center">
+                <div class="ui-layout-north">
+                    <div class="el2">切换为代码视图</div>
+                    <div class="el2">运行</div>
+                    <div class="el2">终止</div>
+                    <div class="el2">保存</div>
+                    <div class="el2">部署</div>
+                </div>
+                <div class="inner-center">
+
+                </div>
+                <div class="ui-layout-south">
+                    <div class="ui-layout-south">
+                        <!-- 日志 -->
+                        <div id="log-container" style="height: 200px; overflow-y: scroll; background: #333; color: #aaa; padding: 10px;">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="outer-east">
+            <div>属性</div>
+            <div>
+                快速帮助
+                实现把一份数据随机分割为两份，供训练、验证使用
+            </div>
+        </div>
+    </div>
+</diiv>
+</body>
+<script>
+    $(document).ready(function() {
+        // 指定websocket路径
+        var websocket = new WebSocket('ws://localhost:8080/log');
+        websocket.onmessage = function(event) {
+            // 接收服务端的实时日志并添加到HTML页面中
+            $("#log-container div").append(event.data);
+            // 滚动条滚动到最低部
+            $("#log-container").scrollTop($("#log-container div").height() - $("#log-container").height());
+        };
+    });
+</script>
+</body>
+</html>

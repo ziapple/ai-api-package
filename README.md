@@ -59,4 +59,9 @@ S1主要运行两个服务shell服务atp-shell-api工程和模型API服务xx-ser
 		return np.array(predict_data)
 	···
 
+# 可视化图形工程
+[strong]仿照百度Paddle的一个图形化设计器，前端使用jquery+SVG，后端使用微服务，设计器的demo直接在atp-model-graph/src/main/resources/static/model-graph-design.html可以看到效果
+![主页面图](images/design-main.png)
+## 总体设计
+
 	 
