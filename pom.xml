@@ -11,5 +11,6 @@
     <modules>
         <module>atp-portal-web</module>
         <module>atp-model-wrapper</module>
+        <module>atp-model-graph</module>
     </modules>
 </project>
