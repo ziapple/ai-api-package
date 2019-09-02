@@ -9,7 +9,7 @@
     draggable: function(constraint) {
       var start, drag, end
         , element = this
-        , parent  = this.parent._parent(SVG.Nested) || this._parent(SVG.Doc)
+        , parent  = this.parent().parent(SVG.Nested) || this.parent(SVG.Doc)
       
       /* remove draggable if already present */
       if (typeof this.fixed === 'function')
@@ -51,7 +51,7 @@
         , y:        box.y
         , width:    box.width
         , height:   box.height
-        , zoom:     parent.viewbox().zoom
+        , zoom:     1
         , rotation: element.transform('rotation') * Math.PI / 180
         }
         

@@ -1,0 +1,93 @@
+<html xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="utf-8">
+    <title>tail log</title>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="svg-2.7.1.js"></script>
+	<script type="text/javascript" src="svg.draggable-0.1.0.js"></script>	
+	<style>
+		.g-unit-body {
+			stroke-width: 1px;
+			fill: #f5f6fa;
+			stroke: #c3c7d9;
+			cursor: move;
+		}
+		.g-unit-name {
+			pointer-events: none;
+			stroke-width: 0;
+			stroke: #000;
+			font-size: 12px;
+		}
+		.g-joint-point {
+			fill: #fff;
+			stroke-width: 1px;
+			stroke: #c3c7d9;
+			cursor: pointer;
+		}
+	</style>
+	<script type="text/javascript">
+		var j_board = {};	//js画布对象
+		var s_board= {};	//svg画布对象
+
+		$(document).ready(function(){
+			j_board = $('#drawing');
+			s_board = SVG('drawing').size(1000, 1300);
+			drowGroup('线性回归', 100, 150, false);
+			drowGroup('数据分割', 100, 50, true);
+
+			//点画线
+			j_board.on('mousedown', '.g-joint-point', function(event){	
+				var $g = $(this).parent();
+				var g = SVG.get($g.attr('id'));
+				//图元固定,记录正在画图的元素
+				g.fixed();
+				var path = g.path();
+				path.addClass('g-temp-connection').stroke({ dasharray:'4', color: '#3582f8', width: 1});
+				//记录正在画线的图元和路径
+				j_board.attr("g", g.attr('id'));
+				j_board.attr("p", path.attr('id'));
+			});
+
+			//画布监控鼠标move事件
+			j_board.on('mousemove', function(event){
+				if(j_board.attr('p')!=null){
+					var $g = $('#' + j_board.attr('g'));
+					var path = SVG.get(j_board.attr('p'));
+					var x = event.pageX - 110;
+					var y = event.pageY - 53;
+					path.attr('d','M' + 110 + ' ' + 33 + 'L' + x + ' ' + y + '');
+				}
+			});
+
+			//画布监控鼠标up事件
+			j_board.on('mouseup', function(event){
+				if(j_board.attr('g')!=null && j_board.attr('p')!=null){
+					var g = SVG.get(j_board.attr('g'));
+					g.draggable();
+					var p = SVG.get(j_board.attr('p'));
+					//p.remove();
+
+					j_board.removeAttr('g').removeAttr('p');
+				}
+			});
+		})
+
+		function drowGroup(text, x, y, up){
+			var group = s_board.group().attr('class', 'g-unit-group');
+			group.attr('transform', 'translate(' + x + ' ' + y +')');
+			group.rect(219, 32).addClass('g-unit-body');
+			group.text(text).addClass('g-unit-name').attr('x', '109.5').attr('y', '-2');
+			if(up){
+				group.circle(10).addClass("g-joint-point").attr('cx', '109.5').attr('cy', '32');
+			}else{
+				group.circle(10).addClass("g-joint-point").attr('cx', '109.5').attr('cy', '0');
+			}
+			group.draggable();
+		}
+	</script>
+</head>
+<html>
+<body>
+	<div id="drawing"></div>
+</body>
+</html>
