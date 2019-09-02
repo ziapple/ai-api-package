@@ -26,10 +26,17 @@
             <th>模型名称</th>
         </thead>
         <tbody>
-            <tr th:each="model,modelStat : ${models}">
-                <td th:text="${modelStat.index+1}"></td>
-                <td th:text="${model}"></td>
-                <input name="modelFile" type="hidden" value="iris.model"/>
+            <tr>
+                <td>1</td>
+                <td>
+                    <input type="radio" name="modelFile" value="iris.model" checked>iris.model</input>
+                </td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>
+                    <input type="radio" name="modelFile" value="mnist.model.h5">mnist.model.h5</input>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -112,7 +119,7 @@
     with open('tmp.jpg', 'wb') as f: # 存成临时文件
         f.write(img_data)
     img = Image.open('tmp.jpg')
-    return np.array(img)</textarea>
+    return np.array(img).reshape(1, 784)</textarea>
     </div>
 </div>
 

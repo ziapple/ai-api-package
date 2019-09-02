@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a44df385-fd05-4d4b-aa0f-55abcdadfa7c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/atp-portal-web/model-apps/mnist_server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/generator/KerasModelGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/generator/KerasModelGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/generator/SKModelGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/generator/SKModelGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/model/ATPModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/model/ATPModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/model/ATPModelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/model/ATPModelService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atp-portal-web/src/main/resources/model_api_server.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/src/main/resources/model_api_server.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-portal-web/model-apps/mnist_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/model-apps/mnist_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atp-portal-web/src/main/resources/templates/model-test.html" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/src/main/resources/templates/model-test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/atp-portal-web/src/main/resources/templates/model-wrapper.html" beforeDir="false" afterPath="$PROJECT_DIR$/atp-portal-web/src/main/resources/templates/model-wrapper.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -214,6 +214,11 @@
           <url>file://$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/generator/AbstractModelGenerator.java</url>
           <line>159</line>
           <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/atp-model-wrapper/src/main/java/com/casic/atp/model/ATPModelService.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

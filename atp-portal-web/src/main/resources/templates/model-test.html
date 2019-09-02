@@ -16,6 +16,10 @@
 <body>
 <div>
     <h2>第一步：填写输入参数</h2>
+    注意：提交格式必须是Json格式，如果是图片，必选先转化成Base64格式，例如：
+    <div style="width:800px;word-wrap:break-word;padding:10px;background:#eee">
+        {"data":"iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAABCUlEQVR4nGP8z4AbMOGRwy/JgmD2fL+0hiHTMhZJ9j8MhDExMTExMak+hIv8Z0CW0yr0Z2JqxZQ8zcqke//z/5+GTMWYkptYdJ/9//+/lZ1pHxZjH7z9////fz0mrJL//////7+Lg8nyKw7JzRxMEgeQ+CiBcOYXQ7g9AzZ//v/vz8mU8BnZJCTJZ6JMYnf+45C0ZGIq+o9DciM7k9NnVEm4g962/WYw4EGLFpiqSiamIDSNCGPZmZieocn9R4pPhnesDAwM/Ky/PzK872dgYO7kQpbUY2BgYAiVfLkSwpWoZoQlsKCNSMmDicHPhMHGEi7J0PWbgeHqSgaGJAWGIE2IECNtkib5kgAcdE6cN0FNlwAAAABJRU5ErkJggg=="}
+    </div>
     <textarea id="model_input" class="textarea"></textarea>
     <br/><br/>
     点击测试:<input type="button" onclick="testModel();" value="点击测试"/>

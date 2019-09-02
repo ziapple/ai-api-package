@@ -48,7 +48,7 @@ public class ATPModelService {
         mnistModel.setType(ATPModel.MODEL_KERAS);
         //读取模型执行所在的容器环境信息
         ATPEnvironment mnistEnvironment = new ATPEnvironment();
-        mnistEnvironment.setIp("192.168.56.102");
+        mnistEnvironment.setIp("localhost");
         mnistModel.setEnvironment(mnistEnvironment);
         //模拟模型环境
         modelDB.put("mnist", mnistModel);

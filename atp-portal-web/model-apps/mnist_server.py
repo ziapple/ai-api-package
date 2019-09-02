@@ -6,6 +6,7 @@ import re
 import base64
 from PIL import Image
 from keras.models import load_model
+import keras
 
 def ok(obj):
     """
@@ -40,39 +41,19 @@ def is_base64(img_str):
 app = Flask(__name__)
 
 
-def get_input(data):
-    """ 自定义输入解析函数
-    （一）ATP的API请求需满足以下要求
-    1. 必须是POST请求
-    2. 提交的content-type只支持application/json格式，如果是图像，需转换成base64编码后才能提交（自定义解析函数除外）
-    3. 提交数据支持string，int，base64三种格式
-    （二）ATP支持的模型
-        ATP只支持joblib，keras两种模型格式，joblib通过joblib.load()加载模型
-    （三）ATP支持的输入参数
-    3.1 JobLib模型
-        由于Joblib的预测函数只支持floating-point matrix浮点矩阵，所以默认解析函数只支持一个参数，不支持多个数据项参数，传入参数类似这种[[6.5, 3.0, 5.8, 2.2]]
-    3.2 Keras模型
-        同JobLib
-    （四）输入数据解析要求
-    4.1 JobLib模型
-    1. 默认解析函数
-        默认解析函数只支持一个参数传输，直接将原始数据作为模型预测的传入参数,系统会自动转化为np.array类型
-    2. 自定义解析函数
-        传入key-value类型的data参数，必须返回一个np.array类型的对象
-    4.2 Keras模型
-        同JobLib
-    :param data: json类型，通过data.get(name)或者data[name]获取请求值
-    :return: 返回np.array类型
+def get_input(req_params):
+    """ req_params要和第二步的输入参数一致
+    :req_params:json格式，通过get("XX")获取数据
+    :return:json格式
     """
-    predict_data = list(data.values())[0]  # 默认获取第一项数据
-    if is_base64(predict_data):  # 必须是图片格式
-        img_data = base64.b64decode(predict_data)
-        with open("tmp.jpg", "wb") as f: # 存成临时文件
-            f.write(img_data)
-        img = Image.open("tmp.jpg")
-        return np.array(img)
-    else:
-        return np.array(predict_data)
+    # 标准代码
+    predict_data=req_params.get("data")
+    # base64图像调用代码
+    img_data = base64.b64decode(predict_data)
+    with open('tmp.jpg', 'wb') as f: # 存成临时文件
+        f.write(img_data)
+    img = Image.open('tmp.jpg')
+    return np.array(img).reshape(1, 784)
 
 
 def get_output(result):
@@ -106,7 +87,8 @@ def model_api():
         # 2. 将请求参数转化为utf8编码，并转化为json格式
         json_data = json.loads(data.decode('utf-8'))
         # 3. 加载模型文件
-        model = load_model('/opt/atp-shell-api/model/iris.model')
+        keras.backend.clear_session()
+        model = load_model('/opt/atp-shell-api/model/mnist.model.h5')
         # 4. 处理请求数据
         x_test = get_input(json_data)
         # 5. 预测模型

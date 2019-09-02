@@ -70,7 +70,7 @@ public class ATPModel {
      * @return
      */
     public String getModelFilePath() {
-        return "model/" + modelFilePath;
+        return "model/" + this.modelFilePath;
     }
 
     public void setModelFilePath(String modelFilePath) {

@@ -9,12 +9,15 @@ package com.casic.atp.generator;
 public class KerasModelGenerator extends AbstractModelGenerator {
     @Override
     public String buildImportLine(){
-        return "from keras.models import load_model";
+        return "from keras.models import load_model\n" +
+                "import keras";
     }
 
     @Override
     public String buildLoadModel(){
-        return "model = load_model('" +  model.getEnvironment().APPRoot + "/" + model.getModelFilePath() + "')";
+        return "keras.backend.clear_session()\n" +
+                //8个空格
+                "        model = load_model('" +  model.getEnvironment().APPRoot + "/" + model.getModelFilePath() + "')";
     }
 
     @Override
